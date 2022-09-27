@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
+    <title>Document</title>
+</head>
+<style>
+    #box{
+        display: grid;
+        grid-template-rows: repeat(1,500px);
+        grid-template-columns: repeat(4,300px);
+        gap:3%;
+        width: 90%;
+        margin-left: 10%;
+        margin-top: 30px;
+    }
+    h2{
+        text-align: center;
+    }#a{
+        margin-left: 5%;
+        font-size: x-large;
+    }h1{
+        text-align: center;
+    }
+    p{
+        text-align: center;
+    }
+    img{
+        height: 60%;
+        width: 300px;
+    }
+</style>
+<body>
+    <h1>Trending Movie</h1>
+    <div ><a id="a" href="index.html">Go back</a></div>
+   
+    <div id="box"></div>
+</body>
+</html>
+<script>
+     async function show(){
+       
+    let url=`https://api.themoviedb.org/3/movie/popular?api_key=b889b71469d6ac517995c93fa59592d6`
+     try{
+       let res= await fetch(url) 
+       let data=await res.json()
+       return data.results
+     }
+     catch(error){
+         console.log("error")
+     }
+    }
+   appendpage()
+    async function appendpage(){
+        var x= await show()
+     console.log(x[0].poster_path)
+       x.forEach(function(elem) {
+            let div=document.createElement("div")
+            let img=document.createElement("img")
+            img.src="https://yt3.ggpht.com/_yRsAdfPv8MM0G48Zo1nnnYdtUwyC6oVLNU0BqRx7WyGgfGVUCpn3cipPubZWWQLpFpBgo9u=s900-c-k-c0x00ffffff-no-rj"
+            let h2=document.createElement("h2")
+            h2.innerText=elem.title
+            let h3=document.createElement("h2")
+            h3.innerText=elem.release_date
+            let p=document.createElement("p")
+            p.innerText=elem.vote_average+"*"
+            
+            div.append(img,h2,h3,p)
+            let card=document.getElementById("box")
+            card.append(div)
+        });
+    }
+ show()
+</script>

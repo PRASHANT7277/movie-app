@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css" />
+    <title>Document</title>
+</head>
+<style>
+    
+</style>
+<body>
+    <h1>Search Movie</h1>
+    
+    <input type="text" id="query" oninput="debouncing(main,1000)">
+    <div id="box"></div>
+    <div id="a"><a href="trending.html">Trending Movie</a></div>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    let id;
+   async function show(){
+       let title=document.querySelector("#query").value
+    let url=`https://www.omdbapi.com/?s=${title}&apikey=216dc9f5`
+     try{
+       let res= await fetch(url) 
+       let data=await res.json()
+       console.log(data.search)
+       return data.Search
+     }catch{
+         alert("movie not found")
+     }
+    }
+
+    async function main(){
+      let data= await show()
+          append(data)
+    }
+    function debouncing(func,delay){
+        if(id){
+          clearInterval(id)
+        }
+        id=setTimeout(function(){
+            func()
+        },delay)
+    }
+    box=document.getElementById("box")
+    function append(movies){
+    box.innerText=null
+     if(movies === undefined){
+         return false
+     }
+    movies.forEach(function(elem) {
+         
+        let h4=document.createElement("h4")
+         h4.innerText=elem.Title
+         h4.cursor="Pointer"
+         h4.addEventListener("click",function(){
+            print(elem)
+            none()
+        })
+         box.append(h4)
+        
+    });
+ } 
+ 
+ container=document.getElementById("container")
+  function print(elem){
+      
+      container.innerText=null
+             console.log(elem)
+            let img=document.createElement("img")
+            img.src=elem.Poster
+            let h2=document.createElement("h2")
+            h2.innerText=elem.Title
+            let h3=document.createElement("h2")
+            h3.innerText=elem.Year
+            let p=document.createElement("p")
+            p.innerText=elem.Type
+            
+            container.append(img,h2,h3,p)
+           
+ }
+ function none(){
+     let x=document.getElementById("box")
+     x.style.display="none"
+     
+ }
+
+</script>

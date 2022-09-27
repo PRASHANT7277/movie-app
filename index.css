@@ -1,0 +1,40 @@
+*{
+    background-image: url("https://previews.123rf.com/images/enterline/enterline1611/enterline161100464/66187886-le-mot-film-%C3%A9crit-en-tuiles-lettres-isol%C3%A9-sur-un-fond-blanc-.jpg");
+}
+input{
+width: 200px;
+margin-left: 39%;
+}#box{
+height: 150px;
+width: 206px;
+
+border-top: none;
+overflow-y: scroll;
+margin-left: 39%;
+scrollbar-color: rebeccapurple green;
+scrollbar-width: thin;
+
+
+}#container{
+height: auto;
+margin-top: 50px;
+width: 20%;
+margin-left: 39%;
+}
+h1{
+text-align: center;
+}
+#box::-webkit-scrollbar{
+    
+        background-color:white;
+        width: 5px;
+}
+#box::-webkit-scrollbar-thumb {
+background:green;
+}#a{
+margin-left: 40%;
+margin-top: 30px;
+}
+a{
+font-size: xx-large;
+}
